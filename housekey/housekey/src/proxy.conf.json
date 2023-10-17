@@ -1,0 +1,7 @@
+{
+  "/*": {
+    "target": "http://www.skrnkr1234.io",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

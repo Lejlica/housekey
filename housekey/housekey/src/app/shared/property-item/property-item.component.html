@@ -1,0 +1,106 @@
+<mat-card class="property-item p-0" [ngClass]="[viewType + '-item', 'column-'+column]" [class.full-width-page]="fullWidthPage" fxLayout="row wrap">  
+  
+    <div fxFlex="100" fxShrink="3" [fxFlex.gt-sm]="(viewType=='list') ? 40 : 100" [fxFlex.sm]="(viewType=='list') ? 50 : 100" class="thumbnail-section">
+
+        <div fxLayout="row wrap" class="property-status">
+            <span *ngFor="let status of property.tip_akcije" [style.background-color]="getStatusBgColor(status)">{{status}}</span>
+        </div>
+        <div fxLayout="row wrap" class="property-status">
+          <span *ngIf="property.tip_akcije !== null && property.tip_akcije !== 'null'" [style.background-color]="getStatusBgColor(property.tip_akcije)">
+            {{ property.tip_akcije }}
+          </span>
+            <span *ngIf="property.isNovogradnja === 'Novogradnja'" [style.background-color]="getStatusBgColor(property.isNovogradnja)">
+            {{ property.isNovogradnja }}
+          </span>
+        </div>
+
+
+
+        <div *ngIf="property.slike.length == 1" class="mat-card-image w-100 m-0">
+            <img [src]="property.slike[0]">
+        </div>
+        <div *ngIf="property.slike.length > 1" class="mat-card-image w-100 m-0">
+            <div class="swiper-container" [swiper]="config">
+                <div class="swiper-wrapper">
+                    <div *ngFor="let image of property.slike" class="swiper-slide">
+                        <img [attr.data-src]="image.url" class="swiper-lazy">
+                        <div class="swiper-lazy-preloader"></div>
+                    </div>
+                </div>
+                <div class="swiper-pagination white"></div>
+                <button mat-icon-button class="swiper-button-prev swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_left</mat-icon></button>
+                <button mat-icon-button class="swiper-button-next swipe-arrow"><mat-icon class="mat-icon-lg">keyboard_arrow_right</mat-icon></button>
+            </div>
+        </div>
+
+
+    </div>
+    <div fxFlex="100" [fxFlex.gt-sm]="(viewType=='list') ? 60 : 100" [fxFlex.sm]="(viewType=='list') ? 50 : 100" class="p-3">
+
+        <div fxLayout="column" fxLayoutAlign="start stretch" class="h-100">
+            <mat-card-content class="mb-0 p-0">
+              
+                <h1 class="title"><a [routerLink]="['/properties', property.id]">{{property.naziv}}</a></h1>
+
+                <p fxLayout="row" class="address">
+                    <mat-icon class="text-muted">location_on</mat-icon>
+                    <span>{{property.lokacija}}</span>
+                </p>
+
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div>
+                        <h3 class="primary-color">
+                            <span *ngIf="property.cijena !== 0">
+                                <!--{{ property.cijena % 1 !== 0 ? property.cijena.toFixed(3).replace('.', ',') : property.cijena.toFixed(0) }}
+                                {{ property.cijena.toLocaleString('en', { minimumFractionDigits: 0, maximumFractionDigits: 3 }) }}
+-->
+                                {{property.cijena}}
+
+                                {{ property.tip_akcije === 'Iznajmljivanje' ? '' : null }}
+                            </span>
+                        </h3>
+
+                        <h3 class="primary-color">
+                        <div *ngIf="property.cijena === 0">Na upit</div>
+                        </h3>
+
+                    </div>
+               <!--     <app-rating [ratingsCount]="property.ratingsCount" [ratingsValue]="property.ratingsValue"></app-rating>-->
+                </div>
+
+              <!--  <div *ngIf="viewType=='list' && fullWidthPage" fxShow="false" fxShow.gt-sm class="mt-3">
+                    <p>{{property.desc}}</p>
+                </div>-->
+
+                <div class="features mt-3">
+                    <!--<p><span>Property size</span><span>{{property.area.value}} {{property.area.unit}}</span></p>-->
+                    <p><span>Kvadratura</span>  <span *ngIf="property.kvadratura !== 0">{{property.kvadratura}} m2</span></p>
+                </div> 
+
+            </mat-card-content>
+            <div class="sticky-footer-helper" fxFlex="grow"></div>
+
+            <mat-card-actions class="m-0 p-0" fxLayoutAlign="space-between center">
+             <!--   <p fxLayout="row" class="date mb-0">
+                    <mat-icon class="text-muted">date_range</mat-icon>
+                <span class="mx-2">{{property.published | date:"dd MMMM, yyyy" }}</span>
+                </p>
+             -->
+                <p fxLayout="row" class="etiketa">
+                    <span *ngIf="property.isKoristeno === 'Novo'">
+                        <span class="etiquette-span">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFD700" width="30" height="30">
+                                <path d="M12 2L1 8.6V21h22V8.6L12 2zm7 17H5v-2h14v2zm0-4H5v-2h14v2zm0-4H5V9h14v2z"/>
+                            </svg>
+                        </span>
+                    </span>
+                </p>
+
+                <div>
+                    <a [routerLink]="['/properties', property.id]" mat-stroked-button color="primary" class="uppercase">Detalji</a>
+                </div>
+            </mat-card-actions>
+        </div>
+    </div> 
+
+</mat-card>

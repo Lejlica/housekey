@@ -1,0 +1,75 @@
+<footer>       
+
+    <div class="px-3">
+        <div class="theme-container">
+
+            <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutAlign.gt-sm="center center" class="content border-lighter py-5">
+                <div fxFlex="100" fxFlex.gt-sm="40" fxLayout="column" fxLayoutAlign="center center"> 
+                    <h2 class="uppercase">PRETPLATITE SE NA NOVOSTI </h2>
+                    <p class="desc mb-1">Budite obavješteni o najnovijim nekretninama</p>
+                </div>
+                <div fxFlex="100" fxFlex.gt-sm="42.4" ngClass.sm="mt-2" ngClass.xs="mt-2">
+                    <form [formGroup]="subscribeForm" (ngSubmit)="onSubscribeFormSubmit(subscribeForm.value)" class="custom-form" fxLayout="row" >
+                        <mat-form-field appearance="outline" floatLabel="always" class="subscribe-input" fxFlex>
+                            <input matInput autocomplete="off" formControlName="email" placeholder="Vaša e-mail adresa">
+                        </mat-form-field>
+                        <button mat-flat-button type="submit" class="subscribe-btn" color="primary">Pretplati se</button>
+                    </form>
+                </div> 
+            </div>
+
+            <div class="py-5 content border-lighter">
+
+                <div fxLayout="row wrap" fxLayoutAlign="space-between"> 
+                    <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="45"> 
+                        <a class="logo" routerLink="/"><app-logo></app-logo></a>
+                        <p class="mt-5 mb-3 desc">Mi smo predana kompanija koja se posvećuje promociji nekretnina na webu.</p>
+                        <p fxLayout="row" fxLayoutAlign="start center" class="mt-2">
+                            <mat-icon color="primary">location_on</mat-icon>
+                            <span class="mx-2">Bišće polje bb</span>
+                        </p>
+
+                        <p fxLayout="row" fxLayoutAlign="start center" class="mt-1">
+                            <mat-icon color="primary">mail_outline</mat-icon>
+                            <a href="mailto:hello@factoryofinnovations.com" style="color: white; margin-left: 2%; text-decoration: none">hello@factoryofinnovations.com</a>
+
+                        </p>
+
+                        <app-social-icons [iconSize]="'lg'" fxLayout="row" fxLayoutAlign="start center" class="desc"></app-social-icons>                    
+                    </div>
+
+                    <div fxFlex="100" fxFlex.gt-sm="30" fxFlex.sm="45" ngClass.xs="pt-5"> 
+                        <h2 class="uppercase">Prijedlog</h2>
+                        <p class="desc">Napišite nam svoj prijedlog</p>
+                        <form [formGroup]="contactForm" (ngSubmit)="send()" class="custom-form pt-2">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>E-mail</mat-label> 
+                                <input matInput autocomplete="off" formControlName="email">
+                                <mat-error *ngIf="feedbackForm.controls.email.errors?.required">Email</mat-error>
+                                <mat-error *ngIf="feedbackForm.controls.email.hasError('invalidEmail')">Neispravna e-mail adresa</mat-error>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Poruka</mat-label>
+                                <textarea matInput formControlName="message" rows="6"></textarea> 
+                                <mat-error *ngIf="feedbackForm.controls.message.errors?.required">Poruka</mat-error>
+                            </mat-form-field>
+                            <div class="w-100 text-center">
+                                <button mat-flat-button color="primary" class="uppercase" >Pošalji</button>
+                            </div> 
+                        </form> 
+                    </div>
+ 
+
+                </div> 
+              
+            </div>
+            
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="copyright">
+                <p ngClass.xs="mt-1">Copyright © 2023 Sva prava pridržana</p>
+                <p>Designed & Developed by <a mat-button href="https://factoryofinnovations.com/" target="_blank" color="warn">Factory of innovations</a></p>
+            </div>
+
+        </div>
+    </div>                  
+                
+</footer>
